@@ -1,0 +1,32 @@
+---
+import type {
+  GetStaticPaths,
+  InferGetStaticParamsType,
+  InferGetStaticPropsType,
+} from "astro";
+import {getCollection} from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+
+export const getStaticPaths = (async () => {
+  const blogPosts = await getCollection("blog");
+  return blogPosts.map((post) => ({params: {slug: post.slug}, props: {post}}));
+}) satisfies GetStaticPaths;
+
+type Params = InferGetStaticParamsType<typeof getStaticPaths>;
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const {post} = Astro.props;
+const {Content} = await post.render();
+---
+
+<Layout
+  title={`${post.data.title} | Ryan Seipp`}
+  description={post.data.description}
+>
+  <main>
+    <h1 class="mb-4 text-4xl text-cyan-600 dark:text-cyan-400">
+      {post.data.title}
+    </h1>
+    <Content />
+  </main>
+</Layout>

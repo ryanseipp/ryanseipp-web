@@ -1,0 +1,42 @@
+---
+import {Image} from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import Technologies from "../components/Technologies.astro";
+import ryanImage from "../images/ryan-s.png";
+---
+
+<Layout title="About | Ryan Seipp" description="Find out about me">
+  <section class="mb-16">
+    <div
+      class="mb-8 flex flex-col items-center gap-8 sm:flex-row sm:items-start"
+    >
+      <Image
+        class="max-w-none rounded-full"
+        src={ryanImage}
+        alt="Ryan Seipp"
+        width={128}
+        height={128}
+      />
+      <div>
+        <h1 class="mb-2 text-4xl font-bold">
+          Hello, I'm
+          <span class="text-cyan-600 dark:text-cyan-400"> Ryan Seipp</span>
+        </h1>
+        <p>
+          I'm a full-stack software engineer with years of experience building
+          scalable APIs and web apps. Passionate for efficient software and
+          reliable systems. Outside of tech, I ride a motorcycle and enjoy walks
+          with my dog.
+        </p>
+      </div>
+    </div>
+    <p>
+      Outside of work, my interests have lead me to investigate and experiment
+      with network technologies. Two primary points of experimentation are with
+      a HTTP web server, and Linux's io_uring. My goal is to build more
+      reliable, efficient, and developer-friendly libraries around these areas
+      of interest.
+    </p>
+  </section>
+  <Technologies />
+</Layout>

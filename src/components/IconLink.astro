@@ -1,0 +1,17 @@
+---
+import type {HTMLAttributes} from "astro/types";
+type Props = HTMLAttributes<"a"> & Required<Pick<HTMLAttributes<"a">, "title">>;
+
+const {href, title, ...attrs} = Astro.props;
+---
+
+<a
+  {href}
+  {title}
+  {...attrs}
+  class="rounded-full text-zinc-700 transition hover:text-zinc-900 focus:text-zinc-900 active:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 dark:focus:text-zinc-100 dark:active:text-zinc-100"
+>
+  <div class="rounded-full p-1">
+    <slot />
+  </div>
+</a>
