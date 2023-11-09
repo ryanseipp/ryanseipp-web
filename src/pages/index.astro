@@ -1,12 +1,9 @@
 ---
 import {getCollection} from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import BlogLink from "../components/BlogLink.astro";
 
-const blogEntries = await getCollection("blog");
-
-function formatDate(date: Date): string {
-  return new Intl.DateTimeFormat("en-US").format(date);
-}
+const blogEntries = await getCollection("blog", (entry) => !entry.data.draft);
 ---
 
 <Layout
@@ -20,19 +17,12 @@ function formatDate(date: Date): string {
     Software Engineer. Networking and Homelab Enthusiast.
   </h2>
   <section class="mt-24">
-    <h3 class="text-3xl">Posts</h3>
+    <h3 class="text-2xl">Posts</h3>
     <ul class="mt-4 gap-4">
       {
-        blogEntries.map((entry) => (
+        blogEntries.map((post) => (
           <li>
-            <a href={`post/${entry.slug}`}>
-              <h3 class="text-2xl underline">{entry.data.title}</h3>
-              <p class="text-xl">{entry.data.description}</p>
-              <p class="flex items-center gap-2 text-sm">
-                <span>{formatDate(entry.data.pubDate)}</span>
-                <span>&middot;</span>
-              </p>
-            </a>
+            <BlogLink post={post} />
           </li>
         ))
       }

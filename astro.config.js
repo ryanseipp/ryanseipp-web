@@ -2,7 +2,7 @@ import {defineConfig} from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import {remarkReadingTime} from "./src/content/remark-reading-time.mjs";
+import {remarkReadingTime} from "./src/remark/reading-time.mjs";
 
 // https://astro.build/config
 export default defineConfig({
@@ -10,5 +10,8 @@ export default defineConfig({
   site: "https://ryanseipp.com",
   markdown: {
     remarkPlugins: [remarkReadingTime],
+    shikiConfig: {
+      theme: "css-variables",
+    },
   },
 });

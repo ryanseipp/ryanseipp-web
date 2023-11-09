@@ -1,0 +1,26 @@
+---
+import type {CollectionEntry} from "astro:content";
+
+type Props = {
+  post: CollectionEntry<"blog">;
+};
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat("en-US").format(date);
+}
+
+const {post} = Astro.props;
+const {remarkPluginFrontmatter: frontmatter} = await post.render();
+---
+
+<a href={`post/${post.slug}`}>
+  <h3 class="mb-2 text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+    {post.data.title}
+  </h3>
+</a>
+<p class="flex items-center gap-2 text-sm font-light">
+  <span>{formatDate(post.data.pubDate)}</span>
+  <span>&middot;</span>
+  <span>{frontmatter.minutesRead}</span>
+</p>
+<p class="mt-3 text-lg">{post.data.description}</p>
