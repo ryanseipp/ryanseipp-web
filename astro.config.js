@@ -8,10 +8,14 @@ import {remarkReadingTime} from "./src/remark/reading-time.mjs";
 export default defineConfig({
   integrations: [tailwind(), sitemap(), robotsTxt()],
   site: "https://ryanseipp.com",
+  prefetch: true,
   markdown: {
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {
-      theme: "css-variables",
+      experimentalThemes: {
+        light: "light-plus",
+        dark: "dark-plus",
+      },
     },
   },
 });

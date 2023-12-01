@@ -1,9 +1,5 @@
 ---
-import type {
-  GetStaticPaths,
-  InferGetStaticParamsType,
-  InferGetStaticPropsType,
-} from "astro";
+import type {GetStaticPaths, InferGetStaticPropsType} from "astro";
 import {getCollection} from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 
@@ -12,7 +8,6 @@ export const getStaticPaths = (async () => {
   return blogPosts.map((post) => ({params: {slug: post.slug}, props: {post}}));
 }) satisfies GetStaticPaths;
 
-type Params = InferGetStaticParamsType<typeof getStaticPaths>;
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 function formatDate(date: Date) {
@@ -21,6 +16,7 @@ function formatDate(date: Date) {
 
 const {post} = Astro.props;
 const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
+const pubDate = formatDate(post.data.pubDate);
 ---
 
 <Layout
@@ -32,8 +28,8 @@ const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
   </h1>
   <h3 class="mb-2 text-xl">{post.data.description}</h3>
   <span class="flex items-center gap-2 text-sm">
-    <span>{formatDate(post.data.pubDate)}</span>
-    <span>&middot;</span>
+    <time datetime={pubDate}>{pubDate}</time>
+    <span aria-hidden="true">&middot;</span>
     <span>{frontmatter.minutesRead}</span>
   </span>
   <div class="content mt-12">
@@ -42,20 +38,77 @@ const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
 </Layout>
 
 <style is:global>
+  html.dark .astro-code,
+  html.dark .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+
+  .astro-code {
+    @media (min-width: 768px) {
+      margin-left: calc(-0.5 * 80ch + 50%);
+      margin-right: calc(-0.5 * 80ch + 50%);
+    }
+
+    padding: 1rem;
+    line-height: 1.375;
+    border-radius: 0.75rem;
+
+    --shadow-color: 220 3% 15%;
+    --shadow-strength: 1%;
+    box-shadow:
+      rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
+      rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
+      rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
+
+    > code {
+      counter-reset: step;
+      counter-increment: step 0;
+
+      > .line {
+        margin-right: 1rem;
+
+        &::before {
+          content: counter(step);
+          counter-increment: step;
+          width: 1.25rem;
+          margin-right: 1rem;
+          display: inline-block;
+          text-align: right;
+          color: var(--fg);
+          opacity: 0.85;
+        }
+      }
+    }
+  }
+
   .content {
-    & :is(h2, h3, h4, h5, h6) {
+    h1 {
+      @apply text-4xl;
+    }
+
+    h2 {
+      @apply text-2xl;
+    }
+
+    h3 {
+      @apply text-xl;
+    }
+
+    :is(h2, h3, h4, h5, h6) {
       margin-top: 3rem;
     }
 
-    & :is(h2, h3, h4, h5, h6, p, pre) {
+    :is(h2, h3, h4, h5, h6, p, pre) {
       margin-bottom: 2rem;
     }
 
-    & table {
+    table {
       @apply block max-w-full overflow-x-scroll;
       margin-bottom: 2rem;
     }
-    & table,
+
+    table,
     th,
     td {
       @apply border-zinc-900 border-opacity-60 dark:border-zinc-100;
@@ -63,12 +116,12 @@ const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
       padding: 0.5rem;
     }
 
-    & p {
+    p {
       font-size: 1.125rem;
       line-height: 1.5;
       opacity: 0.8;
 
-      & > a {
+      > a {
         @apply text-zinc-900 underline dark:text-zinc-100;
         opacity: 0.75;
 
@@ -77,77 +130,13 @@ const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
         }
       }
 
-      & > code {
-        @apply bg-zinc-300 dark:bg-zinc-700;
+      > code {
+        /* @apply bg-zinc-300 dark:bg-zinc-700; */
         padding-left: 0.25rem;
         padding-right: 0.25rem;
         padding-top: 0.125rem;
         padding-bottom: 0.125rem;
         border-radius: 0.25rem;
-      }
-    }
-
-    & pre {
-      --astro-code-color-text: #545464;
-      --astro-code-color-background: #fff;
-      --astro-code-token-constant: #cc6d00;
-      --astro-code-token-string: #6f894e;
-      --astro-code-token-comment: #8a8980;
-      --astro-code-token-keyword: #624c83;
-      --astro-code-token-parameter: #5d57a3;
-      --astro-code-token-function: #4d699b;
-      --astro-code-token-string-expression: #6f894e;
-      --astro-code-token-punctuation: #4e8ca2;
-      --astro-code-token-link: #6693bf;
-
-      @media (min-width: 768px) {
-        margin-left: calc(-0.5 * 80ch + 50%);
-        margin-right: calc(-0.5 * 80ch + 50%);
-      }
-
-      html[class="dark"] & {
-        --astro-code-color-text: #dcd7ba;
-        --astro-code-color-background: #1f1f28;
-        --astro-code-token-constant: #ffa066;
-        --astro-code-token-string: #98bb6c;
-        --astro-code-token-comment: #727169;
-        --astro-code-token-keyword: #957fb8;
-        --astro-code-token-parameter: #b8b4d0;
-        --astro-code-token-function: #7e9cd8;
-        --astro-code-token-string-expression: #98bb6c;
-        --astro-code-token-punctuation: #9cabca;
-        --astro-code-token-link: #7fb4ca;
-      }
-
-      padding: 1rem;
-      line-height: 1.375;
-      border-radius: 0.75rem;
-
-      --shadow-color: 220 3% 15%;
-      --shadow-strength: 1%;
-      box-shadow:
-        rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
-        rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-        rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-
-      & > code {
-        counter-reset: step;
-        counter-increment: step 0;
-
-        & > .line {
-          margin-right: 1rem;
-        }
-
-        & > .line::before {
-          content: counter(step);
-          counter-increment: step;
-          width: 1.25rem;
-          margin-right: 1.5rem;
-          display: inline-block;
-          text-align: right;
-          color: var(--fg);
-          opacity: 0.6;
-        }
       }
     }
   }

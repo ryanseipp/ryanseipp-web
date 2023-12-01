@@ -23,88 +23,88 @@ Enough talk, let's get to some benchmarks. Just how much of a difference does th
 
 ```rs
 fn handle_connection_event(
-    registry: &Registry,
-    connection: &mut TcpStream,
-    event: &Event,
+  registry: &Registry,
+  connection: &mut TcpStream,
+  event: &Event,
 ) -> io::Result<bool> {
-    if event.is_writable() {
-        match connection.write(RESPONSE) {
-            // handle errors or register the connection with a READABLE interest
-        }
+  if event.is_writable() {
+    match connection.write(RESPONSE) {
+        // handle errors or register the connection with a READABLE interest
+    }
+  }
+
+  if event.is_readable() {
+    let mut connection_closed = false;
+    let mut received_data = vec![0; 1024];
+    let mut bytes_read = 0;
+
+    loop {
+      match connection.read(&mut received_data[bytes_read..]) {
+          // handle errors, resize if needed, and count bytes read
+      }
     }
 
-    if event.is_readable() {
-        let mut connection_closed = false;
-        let mut received_data = vec![0; 1024];
-        let mut bytes_read = 0;
-
-        loop {
-            match connection.read(&mut received_data[bytes_read..]) {
-                // handle errors, resize if needed, and count bytes read
-            }
-        }
-
-        if bytes_read != 0 {
-            registry.reregister(
-                connection,
-                event.token(),
-                Interest::WRITABLE.add(Interest::READABLE),
-            )?;
-        }
-
-        if connection_closed {
-            return Ok(true);
-        }
+    if bytes_read != 0 {
+      registry.reregister(
+        connection,
+        event.token(),
+        Interest::WRITABLE.add(Interest::READABLE),
+      )?;
     }
 
-    Ok(false)
+    if connection_closed {
+      return Ok(true);
+    }
+  }
+
+  Ok(false)
 }
 
 fn main() -> io::Result<()> {
-    // TcpListener and epoll setup...
+  // TcpListener and epoll setup...
 
-    // space to keep connections around
-    let mut connections = Slab::with_capacity(2048);
+  // space to keep connections around
+  let mut connections = Slab::with_capacity(2048);
 
-    loop {
-        poll.poll(&mut events, None)?;
+  loop {
+    poll.poll(&mut events, None)?;
 
-        for event in events.iter() {
-            match event.token() {
-                SERVER => loop {
-                    let (mut connection, _address) = match server.accept() {
-                        Ok((connection, address)) => (connection, address),
-                        Err(e) if e.kind() == io::ErrorKind::WouldBlock => {
-                            break;
-                        }
-                        Err(e) => {
-                            return Err(e);
-                        }
-                    };
-
-                    let entry = connections.vacant_entry();
-                    poll.registry().register(
-                        &mut connection,
-                        Token(entry.key()),
-                        Interest::READABLE,
-                    )?;
-                    entry.insert(connection);
-                },
-                token => {
-                    let done = if let Some(connection) = connections.get_mut(token.0) {
-                        handle_connection_event(poll.registry(), connection, event)?
-                    } else {
-                        false
-                    };
-
-                    if done {
-                        let mut connection = connections.remove(token.0);
-                        poll.registry().deregister(&mut connection)?;
-                    }
-                }
+    for event in events.iter() {
+      match event.token() {
+        SERVER => loop {
+          let (mut connection, _address) = match server.accept() {
+            Ok((connection, address)) => (connection, address),
+            Err(e) if e.kind() == io::ErrorKind::WouldBlock => {
+              break;
             }
+            Err(e) => {
+              return Err(e);
+            }
+          };
+
+          let entry = connections.vacant_entry();
+          poll.registry().register(
+            &mut connection,
+            Token(entry.key()),
+            Interest::READABLE,
+          )?;
+          entry.insert(connection);
+        },
+        token => {
+          let done = if let Some(connection) = connections.get_mut(token.0) {
+            handle_connection_event(poll.registry(), connection, event)?
+          } else {
+            false
+          };
+
+          if done {
+            let mut connection = connections.remove(token.0);
+            poll.registry().deregister(&mut connection)?;
+          }
         }
+      }
     }
+  }
 }
 ```
 
@@ -112,51 +112,51 @@ Whereas this is what the io_uring implementation in Rust looks like.
 
 ```rs
 fn main() -> io::Result<()> {
-    // io_uring and TcpListener setup
+  // io_uring and TcpListener setup
 
-    // space for data to be read into from the network
-    let mut buf_alloc = Slab::with_capacity(2048);
+  // space for data to be read into from the network
+  let mut buf_alloc = Slab::with_capacity(2048);
 
-    loop {
-        match submitter.submit_and_wait(1) {
-            Ok(_) => (),
-            Err(err) => return Err(err),
-        }
-
-        cq.sync();
-
-        for cqe in &mut cq {
-            let event = cqe.user_data();
-            let result = cqe.result();
-
-            // error handling
-
-            match Op::from(event) {
-                Op::Accept => {
-                    let conn_fd = result;
-                    if cqe.flags() & IORING_CQE_F_MORE == 0 {
-                        accept(&mut sq, listener.as_raw_fd(), &mut backlog);
-                    }
-                    receive(&mut sq, &mut buf_alloc, conn_fd, &mut backlog);
-                }
-                Op::Recv(fd, buf_idx) => {
-                    buf_alloc.remove(buf_idx as usize);
-
-                    if result == 0 {
-                        close(&mut sq, fd, &mut backlog);
-                    }
-
-                    send(&mut sq, fd, &mut backlog);
-                }
-                Op::Send(fd) => {
-                    receive(&mut sq, &mut buf_alloc, fd, &mut backlog);
-                }
-                Op::Close => {
-                    // perform cleanup if needed
-                }
-            }
-        }
+  loop {
+    match submitter.submit_and_wait(1) {
+      Ok(_) => (),
+      Err(err) => return Err(err),
     }
+
+    cq.sync();
+
+    for cqe in &mut cq {
+      let event = cqe.user_data();
+      let result = cqe.result();
+
+      // error handling
+
+      match Op::from(event) {
+        Op::Accept => {
+          let conn_fd = result;
+          if cqe.flags() & IORING_CQE_F_MORE == 0 {
+            accept(&mut sq, listener.as_raw_fd(), &mut backlog);
+          }
+          receive(&mut sq, &mut buf_alloc, conn_fd, &mut backlog);
+        }
+        Op::Recv(fd, buf_idx) => {
+          buf_alloc.remove(buf_idx as usize);
+
+          if result == 0 {
+            close(&mut sq, fd, &mut backlog);
+          }
+
+          send(&mut sq, fd, &mut backlog);
+        }
+        Op::Send(fd) => {
+          receive(&mut sq, &mut buf_alloc, fd, &mut backlog);
+        }
+        Op::Close => {
+          // perform cleanup if needed
+        }
+      }
+    }
+  }
 }
 ```
 
