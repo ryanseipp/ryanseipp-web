@@ -45,9 +45,9 @@ const pubDate = formatDate(post.data.pubDate);
   }
 
   .astro-code {
-    @media (min-width: 768px) {
-      margin-left: calc(-0.5 * 80ch + 50%);
-      margin-right: calc(-0.5 * 80ch + 50%);
+    @media (min-width: 850px) {
+      margin-left: calc(-0.5 * 80ch + 45%);
+      margin-right: calc(-0.5 * 80ch + 45%);
     }
 
     padding: 1rem;
@@ -131,11 +131,7 @@ const pubDate = formatDate(post.data.pubDate);
       }
 
       > code {
-        /* @apply bg-zinc-300 dark:bg-zinc-700; */
-        padding-left: 0.25rem;
-        padding-right: 0.25rem;
-        padding-top: 0.125rem;
-        padding-bottom: 0.125rem;
+        padding: 0.125rem 0.25rem;
         border-radius: 0.25rem;
       }
     }
