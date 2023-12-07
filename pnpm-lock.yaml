@@ -17,6 +17,12 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^5.0.3
     version: 5.0.3(astro@4.0.3)(tailwindcss@3.3.6)
+  '@fontsource-variable/source-code-pro':
+    specifier: ^5.0.17
+    version: 5.0.17
+  '@fontsource-variable/source-sans-3':
+    specifier: ^5.0.19
+    version: 5.0.19
   astro:
     specifier: ^4.0.3
     version: 4.0.3(typescript@5.3.3)
@@ -661,6 +667,14 @@ packages:
     requiresBuild: true
     dev: false
     optional: true
+
+  /@fontsource-variable/source-code-pro@5.0.17:
+    resolution: {integrity: sha512-O1Hn0QamTJDfFauR68ALijno0xTOy/sJAE/cORyP2s5unEiJOZj0EBQIhHymHdS7XI+xccAfSEdaZNmz9rhttA==}
+    dev: false
+
+  /@fontsource-variable/source-sans-3@5.0.19:
+    resolution: {integrity: sha512-tLw2C4Su5gY+xZLQgkia/EdtsU/Sx5PnFGI+nUzcQPN2Nd2vCXu9gc819Eop+hU9uKeS2RPzja+fKoAJM+QpDg==}
+    dev: false
 
   /@img/sharp-darwin-arm64@0.33.0:
     resolution: {integrity: sha512-070tEheekI1LJWTGPC9WlQEa5UoKTXzzlORBHMX4TbfUxMiL336YHR8vBEUNsjse0RJCX8dZ4ZXwT595aEF1ug==}
