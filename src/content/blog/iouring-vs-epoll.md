@@ -17,9 +17,9 @@ On the heels of the Spectre and Meltdown CPU vulnerabilities, the kernel was for
 
 With an API like epoll, the application must make a syscall to wait for events, then additional syscalls for every operation that is ready to be done. In contrast, io_uring allows the application to queue up multiple requests for work, then make only a single syscall to submit the work. This effectively amortizes the overhead of context switching and CPU vulnerability mitigations over a much larger set of work to be done. Additionally, io_uring has added the ability for the kernel to poll the SQ for additional work. This is a busy loop, and effectively wastes CPU cycles and electricity, but means the application may be able to eliminate syscalls entirely for its core logic.
 
-## Measurements
+## Get to the code already!
 
-Enough talk, let's get to some benchmarks. Just how much of a difference does this really make vs an API like epoll? I've written some code to test the performance of both io_uring and epoll in Rust and Zig. The program will be effectively a TCP echo server, where the server will receive any request, and write a constant result back. Here's the main loop of the Rust epoll implementation, using the [mio](https://crates.io/crates/mio) library.
+Ok, I hear you. Just how much of a difference does all of this really make vs an API like epoll? I've written some code to test the performance of both io_uring and epoll in Rust and Zig. The program will be effectively a TCP echo server, where the server will receive any request, and write a constant result back. Here's the main loop of the Rust epoll implementation, using the [mio](https://crates.io/crates/mio) library.
 
 ```rs
 fn handle_connection_event(
@@ -161,6 +161,8 @@ fn main() -> io::Result<()> {
 ```
 
 You can view the code for both Rust and Zig implementations of io_uring and epoll on [GitHub](https://github.com/ryanseipp/iouring-test). With io_uring, user data can be set to correllate SQEs to CQEs. This allows us to keep track of certain state, such as the file descriptor of the connection, or the index of the buffer we told the kernel to read into. I'm certainly leaving out more of the io_uring code than the epoll code, so don't let the relative lengths of these snippets fool you. You can think of `accept`/`receive`/`send`/`close` as functions that prepare an SQE for the appropriate action.
+
+## Measurements
 
 So how do these implementations perform?
 

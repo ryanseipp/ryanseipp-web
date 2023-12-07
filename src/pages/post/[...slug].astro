@@ -26,13 +26,13 @@ const pubDate = formatDate(post.data.pubDate);
   <h1 class="mb-4 text-4xl text-cyan-600 dark:text-cyan-400">
     {post.data.title}
   </h1>
-  <h3 class="mb-2 text-xl">{post.data.description}</h3>
+  <h2 class="mb-2 text-xl">{post.data.description}</h2>
   <span class="flex items-center gap-2 text-sm">
     <time datetime={pubDate}>{pubDate}</time>
     <span aria-hidden="true">&middot;</span>
     <span>{frontmatter.minutesRead}</span>
   </span>
-  <div class="content mt-12">
+  <div class="content prose prose-zinc mt-12 dark:prose-invert">
     <Content />
   </div>
 </Layout>
@@ -44,96 +44,10 @@ const pubDate = formatDate(post.data.pubDate);
     background-color: var(--shiki-dark-bg) !important;
   }
 
-  .astro-code {
-    @media (min-width: 850px) {
-      margin-left: calc(-0.5 * 80ch + 45%);
-      margin-right: calc(-0.5 * 80ch + 45%);
-    }
-
-    padding: 1rem;
-    line-height: 1.375;
-    border-radius: 0.75rem;
-
-    --shadow-color: 220 3% 15%;
-    --shadow-strength: 1%;
-    box-shadow:
-      rgba(0, 0, 0, 0.2) 0px 2px 1px -1px,
-      rgba(0, 0, 0, 0.14) 0px 1px 1px 0px,
-      rgba(0, 0, 0, 0.12) 0px 1px 3px 0px;
-
-    > code {
-      counter-reset: step;
-      counter-increment: step 0;
-
-      > .line {
-        margin-right: 1rem;
-
-        &::before {
-          content: counter(step);
-          counter-increment: step;
-          width: 1.25rem;
-          margin-right: 1rem;
-          display: inline-block;
-          text-align: right;
-          color: var(--fg);
-          opacity: 0.85;
-        }
-      }
-    }
-  }
-
-  .content {
-    h1 {
-      @apply text-4xl;
-    }
-
-    h2 {
-      @apply text-2xl;
-    }
-
-    h3 {
-      @apply text-xl;
-    }
-
-    :is(h2, h3, h4, h5, h6) {
-      margin-top: 3rem;
-    }
-
-    :is(h2, h3, h4, h5, h6, p, pre) {
-      margin-bottom: 2rem;
-    }
-
-    table {
-      @apply block max-w-full overflow-x-scroll;
-      margin-bottom: 2rem;
-    }
-
-    table,
-    th,
-    td {
-      @apply border-zinc-900 border-opacity-60 dark:border-zinc-100;
-      border-collapse: collapse;
-      padding: 0.5rem;
-    }
-
-    p {
-      font-size: 1.125rem;
-      line-height: 1.5;
-      opacity: 0.8;
-
-      > a {
-        @apply text-zinc-900 underline dark:text-zinc-100;
-        opacity: 0.75;
-
-        &:is(:hover, :focus-visible) {
-          opacity: 1;
-        }
-      }
-
-      > code {
-        padding: 0.125rem 0.25rem;
-        border-radius: 0.25rem;
-      }
+  @media (min-width: 850px) {
+    .astro-code {
+      margin-left: calc(-0.5 * 80ch + 48%);
+      margin-right: calc(-0.5 * 80ch + 48%);
     }
   }
 </style>

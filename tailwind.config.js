@@ -4,16 +4,14 @@ const defaultTheme = require("tailwindcss/defaultTheme");
 export default {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
-    extend: {
-      maxWidth: {
-        prose: "80ch",
-      },
-      fontFamily: {
-        sans: ['"Source Sans 3 Variable"', ...defaultTheme.fontFamily.sans],
-        mono: ["Source Code Pro Variable", ...defaultTheme.fontFamily.mono],
-      },
+    fontFamily: {
+      sans: ["Inter Variable", ...defaultTheme.fontFamily.sans],
+      mono: ["Source Code Pro Variable", ...defaultTheme.fontFamily.mono],
     },
+    extend: {},
   },
-  plugins: [],
+  plugins: [
+    require("@tailwindcss/typography"),
+  ],
   darkMode: "class",
 };
