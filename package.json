@@ -9,24 +9,24 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
-    "@astrojs/rss": "^3.0.0",
+    "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.0.3",
-    "@astrojs/tailwind": "^5.0.2",
-    "astro": "^3.6.4",
+    "@astrojs/tailwind": "^5.0.3",
+    "astro": "^4.0.3",
     "astro-robots-txt": "^1.0.0",
     "markdown-it": "^13.0.2",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "sanitize-html": "^2.11.0",
     "sharp": "^0.33.0",
-    "tailwindcss": "^3.3.5",
-    "typescript": "^5.3.2"
+    "tailwindcss": "^3.3.6",
+    "typescript": "^5.3.3"
   },
   "devDependencies": {
     "@types/sanitize-html": "^2.9.5",
     "prettier": "3.1.0",
     "prettier-plugin-astro": "^0.12.2",
-    "prettier-plugin-tailwindcss": "^0.5.7"
+    "prettier-plugin-tailwindcss": "^0.5.9"
   },
   "prettier": {
     "plugins": [
