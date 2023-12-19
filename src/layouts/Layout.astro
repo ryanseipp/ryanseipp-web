@@ -18,6 +18,7 @@ type Props = {
 };
 
 const {title, description, article} = Astro.props;
+const shortTitle = title.split(" | ")[0];
 ---
 
 <!doctype html>
@@ -30,8 +31,10 @@ const {title, description, article} = Astro.props;
     <meta name="description" content={description} />
     <meta name="twitter:creator" content="@ryan_seipp" />
     <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={shortTitle} />
+    <meta name="twitter:description" content={description} />
     <meta property="og:url" content={Astro.url} />
-    <meta property="og:title" content={title.split(" | ")[0]} />
+    <meta property="og:title" content={shortTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={article ? "article" : "website"} />
     {
