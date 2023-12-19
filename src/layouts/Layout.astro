@@ -29,6 +29,11 @@ const {title, description, article} = Astro.props;
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="twitter:creator" content="@ryan_seipp" />
+    <meta name="twitter:card" content="summary" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:title" content={title.split(" | ")[0]} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={article ? "article" : "website"} />
     {
       article?.published_time ? (
         <meta

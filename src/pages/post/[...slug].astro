@@ -22,6 +22,7 @@ const pubDate = formatDate(post.data.pubDate);
 <Layout
   title={`${post.data.title} | Ryan Seipp`}
   description={post.data.description}
+  article={{published_time: pubDate}}
 >
   <h1 class="mb-4 text-4xl text-cyan-600 dark:text-cyan-400">
     {post.data.title}
