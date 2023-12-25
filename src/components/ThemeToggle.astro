@@ -38,12 +38,9 @@
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    document.getElementById("theme-toggle")?.addEventListener("click", () => {
-      if (
-        localStorage.getItem("pref-theme") === "dark" ||
-        (!("pref-theme" in localStorage) &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
+    const toggle = document.getElementById("theme-toggle");
+    toggle?.addEventListener("click", () => {
+      if (document.documentElement.classList.contains("dark")) {
         localStorage.setItem("pref-theme", "light");
         document.documentElement.classList.remove("dark");
       } else {
