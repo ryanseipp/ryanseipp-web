@@ -19,4 +19,16 @@ export default defineConfig({
       },
     },
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          assetFileNames: (asset) =>
+            asset.name.endsWith(".css") && asset.name.startsWith("about")
+              ? "_astro/base-[hash][extname]"
+              : "_astro/[name]-[hash][extname]",
+        },
+      },
+    },
+  },
 });
