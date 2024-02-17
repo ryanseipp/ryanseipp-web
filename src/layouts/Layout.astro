@@ -29,13 +29,13 @@ const shortTitle = title.split(" | ")[0];
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="twitter:description" content={description} />
+    <meta property="og:description" content={description} />
     <meta name="twitter:creator" content="@ryan_seipp" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content={shortTitle} />
-    <meta name="twitter:description" content={description} />
-    <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={shortTitle} />
-    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
     <meta property="og:type" content={article ? "article" : "website"} />
     {
       article?.published_time ? (
@@ -90,7 +90,7 @@ const shortTitle = title.split(" | ")[0];
     <ViewTransitions />
   </head>
   <body
-    class="mx-4 flex h-full min-h-screen flex-col bg-zinc-100 text-zinc-900 md:mx-auto md:max-w-prose dark:bg-zinc-800 dark:text-zinc-100"
+    class="mx-4 flex h-full min-h-screen flex-col bg-zinc-100 text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 md:mx-auto md:max-w-prose"
   >
     <Navigation />
     <main class="flex-1">
