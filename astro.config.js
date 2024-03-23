@@ -18,7 +18,7 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {
-      experimentalThemes: {
+      themes: {
         light: "light-plus",
         dark: "dark-plus",
       },
