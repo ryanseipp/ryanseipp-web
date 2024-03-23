@@ -7,7 +7,12 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [mdx(), tailwind(), sitemap(), robotsTxt()],
+  integrations: [
+    mdx(),
+    tailwind({applyBaseStyles: false}),
+    sitemap(),
+    robotsTxt(),
+  ],
   site: "https://ryanseipp.com",
   prefetch: true,
   markdown: {

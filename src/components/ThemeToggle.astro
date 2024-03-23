@@ -39,13 +39,35 @@
 <script>
   document.addEventListener("astro:page-load", () => {
     const toggle = document.getElementById("theme-toggle");
-    toggle?.addEventListener("click", () => {
+    function toggleTheme() {
       if (document.documentElement.classList.contains("dark")) {
         localStorage.setItem("pref-theme", "light");
         document.documentElement.classList.remove("dark");
       } else {
         localStorage.setItem("pref-theme", "dark");
         document.documentElement.classList.add("dark");
+      }
+    }
+
+    toggle?.addEventListener("click", () => {
+      // @ts-ignore
+      if (!document.startViewTransition) {
+        if (window.matchMedia("(prefers-reduced-motion)").matches) {
+          toggleTheme();
+        } else {
+          window.requestAnimationFrame(() => {
+            document.body.classList.add("transition-theme");
+            window.requestAnimationFrame(() => {
+              toggleTheme();
+              window.requestAnimationFrame(() => {
+                document.body.classList.remove("transition-theme");
+              });
+            });
+          });
+        }
+      } else {
+        // @ts-ignore
+        document.startViewTransition(toggleTheme);
       }
     });
   });

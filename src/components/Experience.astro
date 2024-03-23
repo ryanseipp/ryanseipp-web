@@ -1,0 +1,68 @@
+---
+import type {Experience} from "./ExperienceAtCompany.astro";
+import ExperienceAtCompany from "./ExperienceAtCompany.astro";
+import truefit from "../images/truefit.png";
+
+type Props = {
+  class?: astroHTML.JSX.HTMLAttributes["class"];
+};
+
+const props = Astro.props;
+
+const experience: Experience[] = [
+  {
+    name: "Truefit",
+    url: "https://truefit.io",
+    image: truefit,
+    positions: [
+      {
+        title: "Senior Software Engineer",
+        startDate: new Date(2024, 2),
+        notes: [],
+      },
+      {
+        title: "Software Engineer",
+        startDate: new Date(2020, 9),
+        endDate: new Date(2024, 2),
+        notes: [
+          "Developed event-driven distributed systems to control physical hardware in hostile environments.",
+          "Increased throughput of async Rust image recognition service by 300%, reducing tail latency proportionally.",
+          "Lead implementation of authentication and authorization for multi-tenant SaaS offering.",
+          'Trusted as the "go-to" person for troubleshooting Docker and networking issues.',
+        ],
+      },
+      {
+        title: "Jr. Software Engineer",
+        startDate: new Date(2018, 6),
+        endDate: new Date(2020, 9),
+        notes: [
+          "Satisfied clients, generating the largest proportion of repeat work of any team.",
+          "Streamlined client's internal tooling, reducing time to complete customer booking by 3x.",
+        ],
+      },
+      {
+        title: "Software Development Intern",
+        startDate: new Date(2018, 5),
+        endDate: new Date(2018, 6),
+        notes: [
+          "Demonstrated ability to learn quickly and deliver effectively in a fast-paced, agile environment.",
+        ],
+      },
+    ],
+  },
+];
+---
+
+<section class={props.class}>
+  <h2 class="mb-4 text-xl">Experience</h2>
+  {
+    experience.map((e) => (
+      <ExperienceAtCompany
+        name={e.name}
+        url={e.url}
+        image={e.image}
+        positions={e.positions}
+      />
+    ))
+  }
+</section>

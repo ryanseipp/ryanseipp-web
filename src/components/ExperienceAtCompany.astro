@@ -1,0 +1,71 @@
+---
+import type {ImageMetadata} from "astro";
+import {Image} from "astro:assets";
+import TextLink from "./TextLink.astro";
+import {
+  formatDuration,
+  getDefaultDateSpanFormatter,
+} from "../utils/dateHelpers";
+
+export type Position = {
+  title: string;
+  startDate: Date;
+  endDate?: Date;
+  notes: string[];
+};
+
+export type Experience = {
+  name: string;
+  url: string;
+  image: ImageMetadata;
+  positions: Position[];
+};
+
+type Props = Experience;
+
+const {name, url, image, positions} = Astro.props;
+
+const formatDateSpan = getDefaultDateSpanFormatter();
+
+const start = new Date(
+  Math.min(...positions.map((p) => p.startDate.valueOf())),
+);
+---
+
+<div>
+  <div class="flex gap-4">
+    <Image
+      src={image}
+      alt={name}
+      class="h-12 w-12"
+      width={96}
+      height={96}
+      loading="eager"
+    />
+    <div>
+      <TextLink href={url}>
+        <h3 class="text-lg font-bold">{name}</h3>
+      </TextLink>
+      <span class="text-sm">{formatDuration(start)}</span>
+    </div>
+  </div>
+  <ul
+    class="ml-6 mt-4 flex flex-col gap-4 border-l border-l-zinc-300 dark:border-l-zinc-600"
+  >
+    {
+      positions.map((p) => (
+        <li class="ml-10">
+          <h4 class="text-lg font-bold">{p.title}</h4>
+          <span class="text-sm font-light text-zinc-700 dark:text-zinc-300">
+            {formatDateSpan(p.startDate, p.endDate)}
+          </span>
+          <ul class="mt-2 flex list-disc flex-col gap-1">
+            {p.notes.map((n) => (
+              <li class="ml-4">{n}</li>
+            ))}
+          </ul>
+        </li>
+      ))
+    }
+  </ul>
+</div>
