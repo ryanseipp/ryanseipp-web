@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "private": true,
+  "license": "Apache-2.0",
   "scripts": {
     "build": "astro check && astro build",
     "format": "prettier --write . --plugin prettier-plugin-astro --plugin prettier-plugin-tailwindcss"
