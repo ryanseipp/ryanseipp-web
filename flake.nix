@@ -17,7 +17,17 @@
       formatter = pkgs.alejandra;
 
       devShells.default = pkgs.mkShell {
-        packages = (with pkgs; [nodejs_20]) ++ (with pkgs.nodePackages; [pnpm prettier typescript]);
+        packages =
+          (with pkgs; [
+            nodejs_20
+            tailwindcss-language-server
+            nodePackages."@astrojs/language-server"
+          ])
+          ++ (with pkgs.nodePackages; [
+            pnpm
+            prettier
+            typescript
+          ]);
       };
     });
 }
