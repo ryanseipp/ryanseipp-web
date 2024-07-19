@@ -1,16 +1,16 @@
 ---
-import RustIcon from "./icons/RustIcon.astro";
+import AzureIcon from "./icons/AzureIcon.astro";
 import CSharpIcon from "./icons/CSharpIcon.astro";
-import TypescriptIcon from "./icons/TypescriptIcon.astro";
-import CppIcon from "./icons/CppIcon.astro";
-import ReactIcon from "./icons/ReactIcon.astro";
-import PostgresIcon from "./icons/PostgresIcon.astro";
-import SqlServerIcon from "./icons/SqlServerIcon.astro";
-import KubernetesIcon from "./icons/KubernetesIcon.astro";
 import DockerIcon from "./icons/DockerIcon.astro";
-import RabbitMQIcon from "./icons/RabbitMQIcon.astro";
 import GitIcon from "./icons/GitIcon.astro";
+import GoIcon from "./icons/GoIcon.astro";
+import KubernetesIcon from "./icons/KubernetesIcon.astro";
 import LinuxIcon from "./icons/LinuxIcon.astro";
+import PostgresIcon from "./icons/PostgresIcon.astro";
+import ReactIcon from "./icons/ReactIcon.astro";
+import RustIcon from "./icons/RustIcon.astro";
+import SqlServerIcon from "./icons/SqlServerIcon.astro";
+import TypescriptIcon from "./icons/TypescriptIcon.astro";
 
 type Props = {
   class?: astroHTML.JSX.HTMLAttributes["class"];
@@ -21,14 +21,14 @@ const props = Astro.props;
 const icons = [
   {Icon: RustIcon, name: "Rust"},
   {Icon: CSharpIcon, name: "C#"},
+  {Icon: GoIcon, name: "Go"},
   {Icon: TypescriptIcon, name: "Typescript"},
-  {Icon: CppIcon, name: "C++"},
   {Icon: ReactIcon, name: "React"},
   {Icon: KubernetesIcon, name: "Kubernetes"},
   {Icon: DockerIcon, name: "Docker"},
+  {Icon: AzureIcon, name: "Azure"},
   {Icon: PostgresIcon, name: "PostgreSQL"},
   {Icon: SqlServerIcon, name: "SQL Server"},
-  {Icon: RabbitMQIcon, name: "RabbitMQ"},
   {Icon: GitIcon, name: "Git"},
   {Icon: LinuxIcon, name: "Linux"},
 ];
@@ -36,7 +36,7 @@ const icons = [
 
 <section class={props.class}>
   <h2 class="mb-4 text-xl">Technologies</h2>
-  <ul class="flex flex-wrap justify-center gap-x-2 gap-y-6">
+  <ul class="mx-auto flex flex-wrap justify-center gap-x-2 gap-y-6">
     {
       icons.map(({Icon, name}) => (
         <li class="flex w-24 flex-col items-center gap-2">
