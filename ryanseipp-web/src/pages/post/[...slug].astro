@@ -24,11 +24,11 @@ const pubDate = formatDate(post.data.pubDate);
   description={post.data.description}
   article={{published_time: pubDate}}
 >
-  <h1 class="mb-4 text-4xl text-cyan-600 dark:text-cyan-400">
+  <h1 class="mb-2 text-4xl text-cyan-600 dark:text-cyan-400">
     {post.data.title}
   </h1>
-  <h2 class="mb-2 text-xl">{post.data.description}</h2>
-  <span class="flex items-center gap-2 text-sm">
+  <h2 class="text-xl">{post.data.description}</h2>
+  <span class="flex items-center gap-2 text-sm font-light">
     <time datetime={pubDate}>{pubDate}</time>
     <span aria-hidden="true">&middot;</span>
     <span>{frontmatter.minutesRead}</span>
@@ -64,5 +64,10 @@ const pubDate = formatDate(post.data.pubDate);
   table {
     display: block;
     overflow-x: auto;
+  }
+
+  .prose :where(img + em) {
+    display: block;
+    text-align: center;
   }
 </style>
