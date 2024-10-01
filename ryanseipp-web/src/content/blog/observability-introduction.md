@@ -2,7 +2,9 @@
 title: An Introduction to Observability
 author: Ryan Seipp
 pubDate: 2023-12-18
-description: "How adding observability to systems helps businesses operate more effectively."
+description:
+  "How adding observability to systems helps businesses operate more
+  effectively."
 ---
 
 ## What is observability?
@@ -12,8 +14,8 @@ description: "How adding observability to systems helps businesses operate more 
 > components. --
 > <cite>[Wikipedia](<https://en.wikipedia.org/wiki/Observability_(software)>)</cite>
 
-In essence, observability is about collecting logs, metrics, and traces from
-our systems in order to better understand their operational requirements,
+In essence, observability is about collecting logs, metrics, and traces from our
+systems in order to better understand their operational requirements,
 troubleshoot errors, and track business-related performance metrics. This data
 represents the living state of the system which, in software-reliant companies,
 can often be the living state of the business. It provides crucial information
@@ -75,9 +77,10 @@ and make it simpler to switch vendors without rewriting a large amount of code.
 
 OpenTelemetry and the ecosystem around it have developed open source libraries
 to automatically instrument applications in a variety of languages.
-Documentation can be found [here](https://opentelemetry.io/docs/instrumentation/)
-for how to add instrumentation in the languages supported. In later blog posts,
-I'll also provide some examples on how to get started in specific languages.
+Documentation can be found
+[here](https://opentelemetry.io/docs/instrumentation/) for how to add
+instrumentation in the languages supported. In later blog posts, I'll also
+provide some examples on how to get started in specific languages.
 
 ### Exporters
 
