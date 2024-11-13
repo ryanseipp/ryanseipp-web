@@ -29,7 +29,8 @@ export default defineConfig({
       rollupOptions: {
         output: {
           assetFileNames: (asset) =>
-            asset.name.endsWith(".css") && asset.name.startsWith("about")
+            asset.names?.some((n) => n.endsWith(".css")) &&
+            asset.names?.some((n) => n.startsWith("about"))
               ? "_astro/base-[hash][extname]"
               : "_astro/[name]-[hash][extname]",
         },

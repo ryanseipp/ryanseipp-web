@@ -19,6 +19,7 @@
       devShells.default = pkgs.mkShell {
         packages =
           (with pkgs; [
+            deno
             nodejs_20
             tailwindcss-language-server
             nodePackages."@astrojs/language-server"
