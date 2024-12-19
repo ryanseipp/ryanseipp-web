@@ -1,0 +1,24 @@
+---
+import TagIcon from "./icons/TagIcon.astro";
+
+type Props = {
+  tags: string[];
+};
+
+const {tags} = Astro.props;
+---
+
+<div class="mt-2 flex flex-row items-center gap-2">
+  <TagIcon size={16} class="text-zinc-700 dark:text-zinc-300" />
+  {
+    tags.map((tag) => (
+      <a
+        href={`/tag/${tag}`}
+        title={tag}
+        class="active-border-zinc-900 rounded-full border border-zinc-700 px-2 py-0.5 text-xs text-zinc-700 transition hover:border-zinc-900 hover:text-zinc-900 focus:border-zinc-900 focus:text-zinc-900 active:text-zinc-900 dark:border-zinc-300 dark:text-zinc-300 dark:hover:border-zinc-100 dark:hover:text-zinc-100 dark:focus:border-zinc-100 dark:focus:text-zinc-100 dark:active:border-zinc-100 dark:active:text-zinc-100"
+      >
+        {tag}
+      </a>
+    ))
+  }
+</div>

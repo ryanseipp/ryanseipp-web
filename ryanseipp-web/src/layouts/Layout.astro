@@ -1,7 +1,7 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import {ViewTransitions} from "astro:transitions";
+import {ClientRouter} from "astro:transitions";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/source-code-pro";
 import "../styles/base.css";
@@ -82,7 +82,7 @@ const shortTitle = title.split(" | ")[0];
         document.documentElement.classList.remove("dark");
       }
     </script>
-    <ViewTransitions />
+    <ClientRouter />
   </head>
   <body
     class="mx-4 flex h-full min-h-screen flex-col bg-zinc-50 text-base text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 md:mx-auto md:max-w-prose"

@@ -1,11 +1,12 @@
 ---
 import type {GetStaticPaths, InferGetStaticPropsType} from "astro";
-import {getCollection} from "astro:content";
+import {getCollection, render} from "astro:content";
 import Layout from "../../layouts/Layout.astro";
+import TagList from "../../components/TagList.astro";
 
 export const getStaticPaths = (async () => {
   const blogPosts = await getCollection("blog", (entry) => !entry.data.draft);
-  return blogPosts.map((post) => ({params: {slug: post.slug}, props: {post}}));
+  return blogPosts.map((post) => ({params: {id: post.id}, props: {post}}));
 }) satisfies GetStaticPaths;
 
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
@@ -15,7 +16,7 @@ function formatDate(date: Date) {
 }
 
 const {post} = Astro.props;
-const {Content, remarkPluginFrontmatter: frontmatter} = await post.render();
+const {Content, remarkPluginFrontmatter: frontmatter} = await render(post);
 const pubDate = formatDate(post.data.pubDate);
 ---
 
@@ -33,6 +34,7 @@ const pubDate = formatDate(post.data.pubDate);
     <span aria-hidden="true">&middot;</span>
     <span>{frontmatter.minutesRead}</span>
   </span>
+  {post.data.categories ? <TagList tags={post.data.categories} /> : null}
   <div class="content prose prose-zinc mt-12 dark:prose-invert">
     <Content />
   </div>

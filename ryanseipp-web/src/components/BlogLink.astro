@@ -1,5 +1,6 @@
 ---
-import type {CollectionEntry} from "astro:content";
+import {render, type CollectionEntry} from "astro:content";
+import TagList from "./TagList.astro";
 
 type Props = {
   post: CollectionEntry<"blog">;
@@ -10,17 +11,18 @@ function formatDate(date: Date): string {
 }
 
 const {post} = Astro.props;
-const {remarkPluginFrontmatter: frontmatter} = await post.render();
+const {remarkPluginFrontmatter: frontmatter} = await render(post);
 ---
 
-<a href={`post/${post.slug}`}>
+<a href={`/post/${post.id}`}>
   <h3 class="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
     {post.data.title}
   </h3>
 </a>
+<p>{post.data.description}</p>
 <p class="flex items-center gap-2 text-sm font-light">
   <span>{formatDate(post.data.pubDate)}</span>
   <span>&middot;</span>
   <span>{frontmatter.minutesRead}</span>
 </p>
-<p class="mt-2">{post.data.description}</p>
+{post.data.categories ? <TagList tags={post.data.categories} /> : null}

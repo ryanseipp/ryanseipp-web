@@ -1,0 +1,54 @@
+---
+import type {GetStaticPaths, InferGetStaticPropsType} from "astro";
+import {getCollection} from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import BlogLink from "../../components/BlogLink.astro";
+import TagIcon from "../../components/icons/TagIcon.astro";
+
+export const getStaticPaths = (async () => {
+  const blogPosts = await getCollection("blog", (entry) => !entry.data.draft);
+  const uniqueCategories = blogPosts.flatMap(
+    (post) => post.data.categories ?? [],
+  );
+
+  return uniqueCategories.map((tag) => ({
+    params: {tag},
+    props: {
+      tag,
+      posts: blogPosts.filter(
+        (post) => post.data.categories?.includes(tag) ?? false,
+      ),
+    },
+  }));
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const {tag, posts} = Astro.props;
+---
+
+<Layout
+  title={`${tag} | Ryan Seipp`}
+  description={`All posts related to ${tag}`}
+>
+  <div class="flex flex-row items-center gap-4">
+    <TagIcon size={40} />
+    <h1 class="text-6xl font-medium">{tag}</h1>
+  </div>
+  <section class="mt-12">
+    <h3 class="text-2xl">Posts</h3>
+    <ul class="mt-4 flex flex-col gap-8">
+      {
+        posts
+          .toSorted(
+            (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+          )
+          .map((post) => (
+            <li>
+              <BlogLink post={post} />
+            </li>
+          ))
+      }
+    </ul>
+  </section>
+</Layout>
