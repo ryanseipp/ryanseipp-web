@@ -2,7 +2,7 @@
 title: Running a homelab for fun and profit
 author: Ryan Seipp
 pubDate: 2024-12-19
-description: Operating a Homelab made me better, so I'm starting fresh.
+description: How I'm getting started with a homelab and what I hope to learn.
 categories: ["homelab", "nixos", "kubernetes", "security"]
 ---
 

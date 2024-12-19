@@ -72,4 +72,8 @@ const pubDate = formatDate(post.data.pubDate);
     display: block;
     text-align: center;
   }
+
+  .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    line-height: 1.25;
+  }
 </style>
