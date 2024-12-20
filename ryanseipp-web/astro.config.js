@@ -19,8 +19,8 @@ export default defineConfig({
     remarkPlugins: [remarkReadingTime],
     shikiConfig: {
       themes: {
-        light: "light-plus",
-        dark: "dark-plus",
+        light: "catppuccin-latte",
+        dark: "catppuccin-mocha",
       },
     },
   },
