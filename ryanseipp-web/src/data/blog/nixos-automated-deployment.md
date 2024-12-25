@@ -6,6 +6,9 @@ description: Automating NixOS installs, and learning from mistakes.
 categories: ["homelab", "nixos", "security"]
 ---
 
+This post builds on configuration in
+[Secure Boot on NixOS](./nixos-secure-boot).
+
 Yesterday I was tinkering setting up users and SSH access, preparing for another
 blog post. I made the changes, deployed the changes onto the MS-01, tried to SSH
 in, and... no luck. I decided to debug on the machine itself to poke around, so
