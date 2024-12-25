@@ -194,6 +194,30 @@ This allows 10 authentication failures (to hopefully prevent a config mistake),
 and will automatically increase the ban time should an attacker fail another
 attempt before their ban expires.
 
+## Putting It All Together
+
+Now that our configuration is in place, we can wire it up. In
+`nix/modules/server/default.nix`:
+
+```nix
+  imports = [
+    # ...
+    ./ssh.nix
+  ];
+
+  # ...
+
+  config = lib.mkIf cfg.enable {
+    rs-homelab.server.ssh.enable = lib.mkDefault true;
+    # ...
+  }
+```
+
+Last but not least, deploy the new configuration and test to make sure you still
+have SSH access. In the last post about
+[automated deployment](./nixos-automated-deployment), we pre-configured SSH
+authorized keys. If you haven't done so yet, make sure that's been set.
+
 ## Conclusion
 
 We now have a pretty secure SSH configuration. We're using good default
