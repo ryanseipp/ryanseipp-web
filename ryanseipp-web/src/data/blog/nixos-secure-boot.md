@@ -7,7 +7,7 @@ categories: ["homelab", "nixos", "security"]
 ---
 
 This post builds on configuration in
-[Encrypted Root and ZFS on NixOS](./nixos-encrypted-root).
+[Encrypted Root and ZFS on NixOS](/post/nixos-encrypted-root).
 
 Physical security of devices is important to protect the integrity of data and
 prevent it from falling into the wrong hands. In the last post, we greatly

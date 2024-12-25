@@ -7,7 +7,7 @@ categories: ["homelab", "nixos", "security"]
 ---
 
 This post builds on configuration in
-[Using Nix Flakes to Configure Systems](./nixos-server).
+[Using Nix Flakes to Configure Systems](/post/nixos-server).
 
 When we're setting up a new machine, one of the first things we need to do is
 partition drives and install file systems. By default, none of the data stored
@@ -192,7 +192,7 @@ Now, continue the rest of the installation as usual. After the system is
 installed and rebooted, you should be prompted for a password to unlock the root
 partition. Once the password is entered, the boot process should continue like
 normal. Repeat the process from
-[Using Nix Flakes to Configure Systems](./nixos-server) to copy the
+[Using Nix Flakes to Configure Systems](/post/nixos-server) to copy the
 `/etc/nixos/hardware-configuration.nix` back to your local device. Also, don't
 forget to add `networking.hostId` to your host's `default.nix`.
 

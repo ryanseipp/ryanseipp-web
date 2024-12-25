@@ -7,7 +7,7 @@ categories: ["homelab", "nixos", "security"]
 ---
 
 This post builds on configuration in
-[(Almost) Unattended NixOS Installs](./nixos-automated-deployment).
+[(Almost) Unattended NixOS Installs](/post/nixos-automated-deployment).
 
 When we first started this journey with NixOS, we setup SSH to be almost
 entirely open, allowing root login and password authentication. I said it
@@ -215,7 +215,7 @@ Now that our configuration is in place, we can wire it up. In
 
 Last but not least, deploy the new configuration and test to make sure you still
 have SSH access. In the last post about
-[automated deployment](./nixos-automated-deployment), we pre-configured SSH
+[automated deployment](/post/nixos-automated-deployment), we pre-configured SSH
 authorized keys. If you haven't done so yet, make sure that's been set.
 
 ## Conclusion

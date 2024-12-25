@@ -7,7 +7,7 @@ categories: ["homelab", "nixos", "security"]
 ---
 
 This post builds on configuration in
-[Secure Boot on NixOS](./nixos-secure-boot).
+[Secure Boot on NixOS](/post/nixos-secure-boot).
 
 Yesterday I was tinkering setting up users and SSH access, preparing for another
 blog post. I made the changes, deployed the changes onto the MS-01, tried to SSH
@@ -152,7 +152,7 @@ in {
 ```
 
 There's a bit going on here, but it's effectively the manual partitioning steps
-we took in [Encrypted Root and ZFS on NixOS](./nixos-encrypted-root). In
+we took in [Encrypted Root and ZFS on NixOS](/post/nixos-encrypted-root). In
 `disko.devices.disk.main.device`, we set the device we're using for boot. This
 is configurable as it won't be the same for every host. We should prefer setting
 `/dev/disk/by-id` values here as `/dev/nvme1n1` and the like can change
