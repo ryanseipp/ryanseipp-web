@@ -5,25 +5,24 @@ import MarkdownIt from "markdown-it";
 
 const parser = new MarkdownIt();
 
-export async function GET() {
-  const blog = await getCollection("blog");
+export async function GET(context) {
+  const blog = await getCollection("blog", (entry) => !entry.data.draft);
 
   return rss({
-    xmlns: {atom: "http://www.w3.org/2005/Atom"},
     title: "Ryan Seipp | Blog",
     description: "A blog about software engineering, networking, and homelabs",
-    site: "http://localhost:4321/",
+    site: context.site,
     author: "Ryan Seipp",
     source: {
       title: "Ryan Seipp | Blog RSS Feed",
-      url: "http://localhost:4321/rss.xml",
     },
-    items: blog.map((post) => ({
-      link: `/post/${post.slug}/`,
-      ...post.data,
-      content: sanitizeHtml(parser.render(post.body)),
-    })),
-    customData: `<atom:link href="http://localhost:4321/rss.xml" rel="self" type="application/rss+xml" />`,
+    items: blog
+      .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+      .map((post) => ({
+        link: `/post/${post.id}/`,
+        ...post.data,
+        content: sanitizeHtml(parser.render(post.body)),
+      })),
     stylesheet: "/rss/styles.xsl",
   });
 }

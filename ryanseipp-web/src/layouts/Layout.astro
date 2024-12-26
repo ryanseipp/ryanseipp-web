@@ -1,7 +1,6 @@
 ---
 import Navigation from "../components/Navigation.astro";
 import Footer from "../components/Footer.astro";
-import {ClientRouter} from "astro:transitions";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/source-code-pro";
 import "../styles/base.css";
@@ -68,6 +67,12 @@ const shortTitle = title.split(" | ")[0];
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Ryan Seipp | Blog RSS Feed"
+      href={new URL("rss.xml", Astro.site)}
+    />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="canonical" href={Astro.url.href} />
@@ -82,7 +87,6 @@ const shortTitle = title.split(" | ")[0];
         document.documentElement.classList.remove("dark");
       }
     </script>
-    <ClientRouter />
   </head>
   <body
     class="mx-4 flex h-full min-h-screen flex-col bg-zinc-50 text-base text-zinc-900 dark:bg-zinc-800 dark:text-zinc-100 md:mx-auto md:max-w-prose"
