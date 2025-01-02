@@ -34,14 +34,16 @@ const start = new Date(
 
 <div>
   <div class="flex gap-4">
-    <Image
-      src={image}
-      alt={name}
-      class="h-12 w-12"
-      width={96}
-      height={96}
-      loading="eager"
-    />
+    <a href={url}>
+      <Image
+        src={image}
+        alt={name}
+        class="h-12 w-12"
+        width={96}
+        height={96}
+        loading="eager"
+      />
+    </a>
     <div>
       <TextLink href={url}>
         <h3 class="text-lg font-bold">{name}</h3>
