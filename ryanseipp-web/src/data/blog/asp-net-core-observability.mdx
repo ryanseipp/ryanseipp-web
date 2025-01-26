@@ -5,7 +5,7 @@ pubDate: 2023-12-19
 description: "Adding instrumentation to ASP.NET Core Web APIs"
 ---
 
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 import grafana from "../../images/dotnet-aot-grafana.png";
 
 In this post, we'll take a look at adding instrumentation to an ASP.NET Core Web
@@ -165,7 +165,8 @@ ProgramLogs.StartingApplication(app.Logger, DateTimeOffset.UtcNow);
 Here, we've added a new `DateTime` parameter. The name of this parameter is
 important, and should be the camel-case equivalent of whatever is in braces
 (`{Timestamp}` in this example). The source generator will then produce the most
-optimal code it can to serialize the `DateTime` to a string for the log's output.
+optimal code it can to serialize the `DateTime` to a string for the log's
+output.
 
 Running the application again, we can see the following output:
 
@@ -315,9 +316,9 @@ public static class OtelConfig
 
 Since we've defined a constant for our service's name, let's go replace any
 occurrence of it in `OpenTelemetryExtensions.cs` with the constant
-`OtelConfig.ServiceName`. Additionally, since we want to operate with this
-class anywhere in our app, we can add the following line to
-`DotnetAotApi.Api.csproj`, and we'll never need a `using` statement for it.
+`OtelConfig.ServiceName`. Additionally, since we want to operate with this class
+anywhere in our app, we can add the following line to `DotnetAotApi.Api.csproj`,
+and we'll never need a `using` statement for it.
 
 ```xml
   <ItemGroup>
@@ -466,8 +467,9 @@ be required. Our API will instead push everything to the collector, which then
 knows how to distribute the data to the individual services.
 
 This requires some configuration files. For brevity, download a copy of every
-file in [this directory](https://github.com/ryanseipp/dotnet-aot-api/tree/main/o11y)
-of my git repository. Make sure to place it in the same `o11y` directory!
+file in
+[this directory](https://github.com/ryanseipp/dotnet-aot-api/tree/main/o11y) of
+my git repository. Make sure to place it in the same `o11y` directory!
 
 To finish up, open a terminal and run
 
@@ -479,7 +481,8 @@ Each of the services will be downloaded and start up. To access Grafana, open
 `localhost:3000` in your browser. In the top left, click the menu, then click on
 "Dashboards". Click on "New" in the top right corner of your screen, then
 "Import". You'll need to copy & paste, or upload each of the files in
-`o11y/dashboards` [here](https://github.com/ryanseipp/dotnet-aot-api/tree/main/o11y/dashboards).
+`o11y/dashboards`
+[here](https://github.com/ryanseipp/dotnet-aot-api/tree/main/o11y/dashboards).
 
 Great, we have everything setup! If you're not running the API already, start up
 the ASP.NET Core API we built. Poke around and hit a few endpoints. After a few
@@ -512,7 +515,8 @@ Down at the bottom of the dashboard, you'll see any logs output from the API.
 Instrumenting an application to export logs, metrics, and traces isn't very
 difficult in the .NET Core ecosystem. There's plenty more libraries to
 automatically instrument your code, including .NET's `HttpClient`, and DB
-drivers like Npgsql or SqlClient. Check out the [opentelemetry-dotnet](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main)
+drivers like Npgsql or SqlClient. Check out the
+[opentelemetry-dotnet](https://github.com/open-telemetry/opentelemetry-dotnet/tree/main)
 repository on GitHub for more examples, and lists of instrumentation libraries.
 
 Stay tuned for more implementations of observability in different languages.

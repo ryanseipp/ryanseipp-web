@@ -3,11 +3,11 @@ import {
   formatDurationWithOptions,
   intervalToDuration,
 } from "date-fns/fp";
-import {enUS} from "date-fns/locale";
+import { enUS } from "date-fns/locale";
 
 export const formatDuration = (startDate: Date, endDate?: Date) =>
   formatDurationWithOptions(
-    {locale: enUS, delimiter: ", ", format: ["years", "months"]},
+    { locale: enUS, delimiter: ", ", format: ["years", "months"] },
     intervalToDuration({
       start: addMonths(-1, startDate),
       end: endDate ?? addMonths(1, new Date()),

@@ -6,7 +6,7 @@
   id="theme-toggle"
   title="Toggle light & dark mode"
   aria-live="polite"
-  class="rounded-full p-1 text-zinc-700 transition hover:text-zinc-900 focus:text-zinc-900 active:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 dark:focus:text-zinc-100 dark:active:text-zinc-100"
+  class="cursor-pointer rounded-full p-1 text-zinc-700 transition hover:text-zinc-900 focus:text-zinc-900 active:text-zinc-900 dark:text-zinc-300 dark:hover:text-zinc-100 dark:focus:text-zinc-100 dark:active:text-zinc-100"
 >
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -37,38 +37,26 @@
 </button>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    const toggle = document.getElementById("theme-toggle");
-    function toggleTheme() {
-      if (document.documentElement.classList.contains("dark")) {
-        localStorage.setItem("pref-theme", "light");
-        document.documentElement.classList.remove("dark");
-      } else {
-        localStorage.setItem("pref-theme", "dark");
-        document.documentElement.classList.add("dark");
-      }
+  const toggle = document.getElementById("theme-toggle");
+  function toggleTheme() {
+    if (document.documentElement.classList.contains("dark")) {
+      localStorage.setItem("pref-theme", "light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.setItem("pref-theme", "dark");
+      document.documentElement.classList.add("dark");
     }
+  }
 
-    toggle?.addEventListener("click", () => {
-      // @ts-ignore
-      if (!document.startViewTransition) {
-        if (window.matchMedia("(prefers-reduced-motion)").matches) {
-          toggleTheme();
-        } else {
-          window.requestAnimationFrame(() => {
-            document.body.classList.add("transition-theme");
-            window.requestAnimationFrame(() => {
-              toggleTheme();
-              window.requestAnimationFrame(() => {
-                document.body.classList.remove("transition-theme");
-              });
-            });
-          });
-        }
-      } else {
-        // @ts-ignore
-        document.startViewTransition(toggleTheme);
-      }
+  toggle?.addEventListener("click", () => {
+    window.requestAnimationFrame(() => {
+      document.body.classList.add("transition-theme");
+      window.requestAnimationFrame(() => {
+        toggleTheme();
+        window.requestAnimationFrame(() => {
+          document.body.classList.remove("transition-theme");
+        });
+      });
     });
   });
 </script>

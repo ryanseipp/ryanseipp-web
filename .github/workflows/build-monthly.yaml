@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Trigger Deployment
-        run: contents="$(jq ".description = \"$(date)\"" package.json)" && echo -E "${contents}" > package.json
+        run:
+          contents="$(jq ".description = \"$(date)\"" package.json)" && echo -E
+          "${contents}" > package.json
 
       - name: Commit result
         run: |

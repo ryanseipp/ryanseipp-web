@@ -1,5 +1,5 @@
 import {defineConfig} from "astro/config";
-import tailwind from "@astrojs/tailwind";
+import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
 import {remarkReadingTime} from "./src/remark/reading-time.mjs";
@@ -7,12 +7,7 @@ import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [
-    mdx(),
-    tailwind({applyBaseStyles: false}),
-    sitemap(),
-    robotsTxt(),
-  ],
+  integrations: [mdx(), sitemap(), robotsTxt()],
   site: "https://ryanseipp.com",
   prefetch: true,
   markdown: {
@@ -25,6 +20,7 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [tailwindcss()],
     build: {
       rollupOptions: {
         output: {
