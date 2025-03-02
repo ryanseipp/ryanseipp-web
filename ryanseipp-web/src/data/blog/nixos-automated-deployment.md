@@ -354,7 +354,7 @@ nix run github:nix-community/nixos-anywhere -- \
   --extra-files $MY_KEYS \
   --disk-encryption-keys /tmp/disk-encryption.key $MY_PASS \
   --generate-hardware-config nixos-generate-config ./nix/hosts/kube-host-1/hardware-configuration.nix \
-  --target-host nixos@192.160.0.12
+  --target-host nixos@192.168.0.12
 ```
 
 nixos-anywhere should kick into gear. You'll be prompted to enter the SSH
@@ -392,7 +392,7 @@ bootctl status
 lsblk
 
 # enroll the device with the TPM (change this)
-cryptenroll /dev/nvme0n1
+cryptenroll /dev/nvme0n1p2
 ```
 
 Now, when the machine is rebooted again, the TPM should unlock the encrypted
