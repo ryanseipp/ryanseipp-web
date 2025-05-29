@@ -1,8 +1,9 @@
 ---
+import AWSIcon from "./icons/AWSIcon.astro";
 import AzureIcon from "./icons/AzureIcon.astro";
-import CSharpIcon from "./icons/CSharpIcon.astro";
 import DockerIcon from "./icons/DockerIcon.astro";
 import GitIcon from "./icons/GitIcon.astro";
+import GitHubIcon from "./icons/GitHubIcon.astro";
 import GoIcon from "./icons/GoIcon.astro";
 import KubernetesIcon from "./icons/KubernetesIcon.astro";
 import LinuxIcon from "./icons/LinuxIcon.astro";
@@ -10,7 +11,7 @@ import PostgresIcon from "./icons/PostgresIcon.astro";
 import ReactIcon from "./icons/ReactIcon.astro";
 import RustIcon from "./icons/RustIcon.astro";
 import SqlServerIcon from "./icons/SqlServerIcon.astro";
-import TypescriptIcon from "./icons/TypescriptIcon.astro";
+import TerraformIcon from "./icons/TerraformIcon.astro";
 
 type Props = {
   class?: astroHTML.JSX.HTMLAttributes["class"];
@@ -19,18 +20,18 @@ type Props = {
 const props = Astro.props;
 
 const icons = [
-  {Icon: RustIcon, name: "Rust"},
-  {Icon: CSharpIcon, name: "C#"},
-  {Icon: GoIcon, name: "Go"},
-  {Icon: TypescriptIcon, name: "Typescript"},
-  {Icon: ReactIcon, name: "React"},
   {Icon: KubernetesIcon, name: "Kubernetes"},
-  {Icon: DockerIcon, name: "Docker"},
   {Icon: AzureIcon, name: "Azure"},
+  {Icon: AWSIcon, name: "AWS"},
+  {Icon: GitHubIcon, name: "GitHub"},
+  {Icon: DockerIcon, name: "Docker"},
+  {Icon: TerraformIcon, name: "Terraform"},
+  {Icon: LinuxIcon, name: "Linux"},
+  {Icon: GoIcon, name: "Go"},
+  {Icon: RustIcon, name: "Rust"},
+  {Icon: ReactIcon, name: "React"},
   {Icon: PostgresIcon, name: "PostgreSQL"},
   {Icon: SqlServerIcon, name: "SQL Server"},
-  {Icon: GitIcon, name: "Git"},
-  {Icon: LinuxIcon, name: "Linux"},
 ];
 ---
 
