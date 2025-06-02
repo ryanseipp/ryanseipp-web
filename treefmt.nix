@@ -17,6 +17,8 @@
 
   programs = {
     nixfmt.enable = true;
+    leptosfmt.enable = true;
+    rustfmt.enable = true;
 
     prettier = {
       enable = true;

@@ -1,46 +1,49 @@
 {
-	"name": "ryanseipp-web",
-	"type": "module",
-	"version": "0.0.1",
-	"private": true,
-	"license": "Apache-2.0",
-	"scripts": {
-		"dev": "astro dev",
-		"start": "astro dev",
-		"build": "astro check && astro build",
-		"preview": "astro preview",
-		"astro": "astro",
-		"format": "prettier --write . \"!pnpm-lock.yaml\" --plugin prettier-plugin-astro --plugin prettier-plugin-tailwindcss"
-	},
-	"dependencies": {
-		"@astrojs/check": "^0.9.4",
-		"@astrojs/mdx": "4.3.0",
-		"@astrojs/rss": "^4.0.11",
-		"@astrojs/sitemap": "^3.4.0",
-		"@fontsource-variable/inter": "^5.2.5",
-		"@fontsource-variable/source-code-pro": "^5.2.5",
-		"@tailwindcss/typography": "^0.5.16",
-		"@tailwindcss/vite": "^4.1.8",
-		"astro": "^5.8.1",
-		"astro-robots-txt": "^1.0.0",
-		"markdown-it": "^14.1.0",
-		"mdast-util-to-string": "^4.0.0",
-		"reading-time": "^1.5.0",
-		"sanitize-html": "^2.17.0",
-		"sharp": "^0.34.2",
-		"tailwindcss": "^4.1.8",
-		"typescript": "^5.8.3"
-	},
-	"devDependencies": {
-		"@types/sanitize-html": "^2.16.0",
-		"date-fns": "^4.1.0",
-		"prettier": "^3.5.3",
-		"prettier-plugin-astro": "^0.14.1",
-		"prettier-plugin-tailwindcss": "^0.6.11"
-	},
-	"prettier": {
-		"plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
-		"bracketSpacing": false
-	},
-	"description": "Sat Mar 23 01:54:36 PM EDT 2024"
+  "name": "ryanseipp-web",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "license": "Apache-2.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write . \"!pnpm-lock.yaml\" --plugin prettier-plugin-astro --plugin prettier-plugin-tailwindcss"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@astrojs/mdx": "4.3.0",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.4.0",
+    "@fontsource-variable/inter": "^5.2.5",
+    "@fontsource-variable/source-code-pro": "^5.2.5",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.8",
+    "astro": "^5.8.1",
+    "astro-robots-txt": "^1.0.0",
+    "markdown-it": "^14.1.0",
+    "mdast-util-to-string": "^4.0.0",
+    "reading-time": "^1.5.0",
+    "sanitize-html": "^2.17.0",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.1.8",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@types/sanitize-html": "^2.16.0",
+    "date-fns": "^4.1.0",
+    "prettier": "^3.5.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.6.11"
+  },
+  "prettier": {
+    "plugins": [
+      "prettier-plugin-astro",
+      "prettier-plugin-tailwindcss"
+    ],
+    "bracketSpacing": false
+  },
+  "description": "Sat Mar 23 01:54:36 PM EDT 2024"
 }

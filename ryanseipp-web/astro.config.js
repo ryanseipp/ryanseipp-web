@@ -1,8 +1,8 @@
-import {defineConfig} from "astro/config";
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import robotsTxt from "astro-robots-txt";
-import {remarkReadingTime} from "./src/remark/reading-time.mjs";
+import { remarkReadingTime } from "./src/remark/reading-time.mjs";
 import mdx from "@astrojs/mdx";
 
 // https://astro.build/config
