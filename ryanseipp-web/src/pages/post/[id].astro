@@ -35,7 +35,7 @@ const pubDate = formatDate(post.data.pubDate);
     <span>{frontmatter.minutesRead}</span>
   </span>
   {post.data.categories ? <TagList tags={post.data.categories} /> : null}
-  <div class="content prose prose-zinc mt-12 dark:prose-invert">
+  <div class="content prose prose-zinc dark:prose-invert mt-12">
     <Content />
   </div>
 </Layout>

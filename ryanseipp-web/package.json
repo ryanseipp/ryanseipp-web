@@ -14,29 +14,30 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "4.3.0",
-    "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.4.0",
-    "@fontsource-variable/inter": "^5.2.5",
+    "@astrojs/mdx": "4.3.3",
+    "@astrojs/rss": "^4.0.12",
+    "@astrojs/sitemap": "^3.4.2",
+    "@fontsource-variable/inter": "^5.2.6",
     "@fontsource-variable/source-code-pro": "^5.2.6",
+    "@playform/compress": "^0.2.0",
     "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.8",
-    "astro": "^5.8.1",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^5.12.8",
     "astro-robots-txt": "^1.0.0",
     "markdown-it": "^14.1.0",
     "mdast-util-to-string": "^4.0.0",
     "reading-time": "^1.5.0",
     "sanitize-html": "^2.17.0",
-    "sharp": "^0.34.2",
-    "tailwindcss": "^4.1.8",
-    "typescript": "^5.8.3"
+    "sharp": "^0.34.3",
+    "tailwindcss": "^4.1.11",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@types/sanitize-html": "^2.16.0",
     "date-fns": "^4.1.0",
-    "prettier": "^3.5.3",
+    "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.6.12"
+    "prettier-plugin-tailwindcss": "^0.6.14"
   },
   "prettier": {
     "plugins": [

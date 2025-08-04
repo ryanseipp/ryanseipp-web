@@ -2,8 +2,7 @@
 title: An Introduction to Observability
 author: Ryan Seipp
 pubDate: 2023-12-18
-description:
-  "How adding observability to systems helps businesses operate more
+description: "How adding observability to systems helps businesses operate more
   effectively."
 ---
 
