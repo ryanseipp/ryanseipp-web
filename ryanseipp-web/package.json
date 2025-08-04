@@ -10,7 +10,8 @@
     "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "prettier --write . \"!pnpm-lock.yaml\" --plugin prettier-plugin-astro --plugin prettier-plugin-tailwindcss"
+    "format": "prettier --write . \"!pnpm-lock.yaml\" --plugin prettier-plugin-astro --plugin prettier-plugin-tailwindcss",
+    "optimize-icons": "node optimize-icons.js && pnpm format src/components/icons/*.astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",

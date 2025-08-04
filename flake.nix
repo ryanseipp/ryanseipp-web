@@ -37,6 +37,7 @@
               nodePackages."@astrojs/language-server"
             ])
             ++ (with pkgs.nodePackages; [
+              svgo
               pnpm
               prettier
               typescript
