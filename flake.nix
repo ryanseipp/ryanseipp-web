@@ -32,7 +32,7 @@
           packages =
             (with pkgs; [
               deno
-              nodejs_20
+              nodejs_24
               tailwindcss-language-server
               nodePackages."@astrojs/language-server"
             ])
