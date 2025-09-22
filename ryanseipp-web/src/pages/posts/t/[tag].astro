@@ -1,9 +1,9 @@
 ---
 import type {GetStaticPaths, InferGetStaticPropsType} from "astro";
 import {getCollection} from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import BlogLink from "../../components/BlogLink.astro";
-import TagIcon from "../../components/icons/TagIcon.astro";
+import Layout from "../../../layouts/Layout.astro";
+import BlogLink from "../../../components/BlogLink.astro";
+import TagIcon from "../../../components/icons/TagIcon.astro";
 
 export const getStaticPaths = (async () => {
   const blogPosts = await getCollection("blog", (entry) => !entry.data.draft);
@@ -25,10 +25,12 @@ export const getStaticPaths = (async () => {
 type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 
 const {tag, posts} = Astro.props;
+
+const capitalizedTag = tag.charAt(0).toUpperCase() + tag.slice(1);
 ---
 
 <Layout
-  title={`${tag} | Ryan Seipp`}
+  title={`${capitalizedTag} Posts | Ryan Seipp`}
   description={`All posts related to ${tag}`}
 >
   <div class="flex flex-row items-center gap-4">
@@ -36,7 +38,6 @@ const {tag, posts} = Astro.props;
     <h1 class="text-6xl font-medium">{tag}</h1>
   </div>
   <section class="mt-12">
-    <h3 class="text-2xl">Posts</h3>
     <ul class="mt-4 flex flex-col gap-8">
       {
         posts

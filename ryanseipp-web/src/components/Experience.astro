@@ -1,6 +1,7 @@
 ---
 import type {Experience} from "./ExperienceAtCompany.astro";
 import ExperienceAtCompany from "./ExperienceAtCompany.astro";
+import govini from "../images/govini.png";
 import truefit from "../images/truefit.png";
 
 type Props = {
@@ -11,6 +12,18 @@ const props = Astro.props;
 
 const experience: Experience[] = [
   {
+    name: "Govini",
+    url: "https://www.govini.com",
+    image: govini,
+    positions: [
+      {
+        title: "Sr. DevSecOps Engineer",
+        startDate: new Date(2025, 9),
+        notes: [],
+      },
+    ],
+  },
+  {
     name: "Truefit",
     url: "https://truefit.io",
     image: truefit,
@@ -18,6 +31,7 @@ const experience: Experience[] = [
       {
         title: "Lead Platform Engineer",
         startDate: new Date(2025, 3),
+        endDate: new Date(2025, 9),
         notes: [
           "Leading development of internal developer platform, building in security, operational, and performance best practices.",
           "Reduced the time for environment spin-up from one week to under an hour, onboarding all projects into this new paradigm.",

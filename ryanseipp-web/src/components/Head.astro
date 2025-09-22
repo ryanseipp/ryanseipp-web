@@ -1,0 +1,74 @@
+---
+import type {LayoutProps} from "../types/Layout";
+
+type Props = LayoutProps;
+
+const {title, description, article} = Astro.props;
+const shortTitle = title.split(" | ")[0];
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width" />
+  <meta name="generator" content={Astro.generator} />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="twitter:description" content={description} />
+  <meta property="og:description" content={description} />
+  <meta name="twitter:creator" content="@ryan_seipp" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={shortTitle} />
+  <meta property="og:title" content={shortTitle} />
+  <meta property="og:url" content={Astro.url} />
+  <meta property="og:type" content={article ? "article" : "website"} />
+  {
+    article?.published_time ? (
+      <meta
+        property="article:published_time"
+        content={article.published_time}
+      />
+    ) : null
+  }
+  {
+    article?.modified_time ? (
+      <meta property="article:modified_time" content={article.modified_time} />
+    ) : null
+  }
+  {article ? <meta property="article:author" content="Ryan Seipp" /> : null}
+  {article ? <meta property="article:section" content="Technology" /> : null}
+  {
+    article?.tags
+      ? article.tags.map((tag) => <meta property="article:tag" content={tag} />)
+      : null
+  }
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="Ryan Seipp | Blog RSS Feed"
+    href={new URL("rss.xml", Astro.site)}
+  />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="canonical" href={Astro.url.href} />
+  <script
+    is:inline
+    defer
+    src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "41cdbc63dc184f1e9181f3a777d60916"}'></script>
+  <script is:inline data-astro-rerun>
+    if (
+      localStorage.getItem("pref-theme") === "dark" ||
+      (!("pref-theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  </script>
+</head>

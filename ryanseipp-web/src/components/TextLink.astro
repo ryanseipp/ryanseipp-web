@@ -1,13 +1,19 @@
 ---
 import type {HTMLAttributes} from "astro/types";
+import {twMerge} from "tailwind-merge";
 
-type Props = HTMLAttributes<"a">;
+type Props = HTMLAttributes<"a"> & {
+  className?: HTMLAttributes<"a">["class"];
+};
 
-const {href, ...attrs} = Astro.props;
+const {href, className, ...attrs} = Astro.props;
 ---
 
 <a
-  class="text-zinc-700 underline decoration-zinc-50 transition hover:text-zinc-900 hover:decoration-zinc-900 focus:decoration-zinc-900 active:decoration-zinc-900 dark:text-zinc-300 dark:decoration-zinc-800 hover:dark:text-zinc-100 hover:dark:decoration-zinc-100 focus:dark:decoration-zinc-100 active:dark:decoration-zinc-100"
+  class={twMerge(
+    "text-zinc-700 underline decoration-zinc-50 transition hover:text-zinc-900 hover:decoration-zinc-900 focus:decoration-zinc-900 active:decoration-zinc-900 dark:text-zinc-300 dark:decoration-zinc-800 hover:dark:text-zinc-100 hover:dark:decoration-zinc-100 focus:dark:decoration-zinc-100 active:dark:decoration-zinc-100",
+    className,
+  )}
   {href}
   {...attrs}
 >
