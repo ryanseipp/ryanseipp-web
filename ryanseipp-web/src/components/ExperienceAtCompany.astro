@@ -18,12 +18,13 @@ export type Experience = {
   name: string;
   url: string;
   image: ImageMetadata;
+  imageDark?: ImageMetadata;
   positions: Position[];
 };
 
 type Props = Experience;
 
-const {name, url, image, positions} = Astro.props;
+const {name, url, image, imageDark, positions} = Astro.props;
 
 const formatDateSpan = getDefaultDateSpanFormatter();
 
@@ -38,11 +39,24 @@ const start = new Date(
       <Image
         src={image}
         alt={name}
-        class="h-12 w-12 object-contain"
+        class:list={["h-12 w-12 object-contain", imageDark && "dark:hidden"]}
         width={96}
         height={96}
         loading="eager"
       />
+      {
+        imageDark && (
+          <Image
+            src={imageDark}
+            alt=""
+            aria-hidden="true"
+            class="hidden h-12 w-12 object-contain dark:block"
+            width={96}
+            height={96}
+            loading="eager"
+          />
+        )
+      }
     </a>
     <div>
       <TextLink href={url}>

@@ -7,7 +7,7 @@ categories: ["homelab", "nixos", "security"]
 ---
 
 This post builds on configuration in
-[Securing SSH on NixOS](/post/nixos-secure-ssh).
+[Securing SSH on NixOS](/posts/nixos-secure-ssh).
 
 There's a lot that goes into security. Throughout the course of my homelab, I'll
 unfortunately never stop needing to worry about it. We've already covered a lot

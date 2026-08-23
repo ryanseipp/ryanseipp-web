@@ -12,16 +12,13 @@ export async function GET(context) {
     title: "Ryan Seipp | Blog",
     description: "A blog about software engineering, networking, and homelabs",
     site: context.site,
-    author: "Ryan Seipp",
-    source: {
-      title: "Ryan Seipp | Blog RSS Feed",
-    },
     items: blog
       .toSorted((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
       .map((post) => ({
-        link: `/post/${post.id}/`,
+        link: `/posts/${post.id}/`,
         ...post.data,
-        content: sanitizeHtml(parser.render(post.body)),
+        author: "rseipp@ryanseipp.com (Ryan Seipp)",
+        content: sanitizeHtml(parser.render(post.body ?? "")),
       })),
     stylesheet: "/rss/styles.xsl",
   });

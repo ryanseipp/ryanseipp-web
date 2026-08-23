@@ -1,4 +1,5 @@
-import {defineCollection, z} from "astro:content";
+import {defineCollection} from "astro:content";
+import {z} from "astro/zod";
 import {glob} from "astro/loaders";
 
 const MS_IN_SECOND = 1000;
@@ -9,7 +10,7 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    pubDate: z.date({coerce: true}).transform(
+    pubDate: z.date().transform(
       // Make date TZ-independent
       (date) =>
         new Date(date.getTime() + date.getTimezoneOffset() * MS_IN_MINUTE),

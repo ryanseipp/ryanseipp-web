@@ -10,7 +10,7 @@ description: "How adding observability to systems helps businesses operate more
 
 > In distributed systems, observability is the ability to collect data about
 > programs' execution, modules' internal states, and the communication among
-> components. --
+> components. ---
 > <cite>[Wikipedia](<https://en.wikipedia.org/wiki/Observability_(software)>)</cite>
 
 In essence, observability is about collecting logs, metrics, and traces from our

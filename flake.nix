@@ -9,39 +9,32 @@
       url = "github:numtide/treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      flake-utils,
-      treefmt-nix,
-    }:
+  outputs = {
+    self,
+    nixpkgs,
+    flake-utils,
+    treefmt-nix,
+  }:
     flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = import nixpkgs { inherit system; };
+      system: let
+        pkgs = import nixpkgs {inherit system;};
         treefmtEval = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
-      in
-      {
+      in {
         formatter = treefmtEval.config.build.wrapper;
 
         devShells.default = pkgs.mkShell {
-          packages =
-            (with pkgs; [
-              deno
-              nodejs_24
-              tailwindcss-language-server
-              nodePackages."@astrojs/language-server"
-            ])
-            ++ (with pkgs.nodePackages; [
-              svgo
-              pnpm
-              prettier
-              typescript
-            ]);
+          packages = with pkgs; [
+            deno
+            nodejs_24
+            tailwindcss-language-server
+            astro-language-server
+            svgo
+            pnpm
+            prettier
+            typescript
+          ];
         };
 
         checks = {

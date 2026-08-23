@@ -1,7 +1,8 @@
 ---
 import type {Experience} from "./ExperienceAtCompany.astro";
 import ExperienceAtCompany from "./ExperienceAtCompany.astro";
-import govini from "../images/govini.png";
+import air from "../images/air.svg";
+import airWhite from "../images/air-white.svg";
 import truefit from "../images/truefit.png";
 
 type Props = {
@@ -14,7 +15,8 @@ const experience: Experience[] = [
   {
     name: "Govini",
     url: "https://www.govini.com",
-    image: govini,
+    image: air,
+    imageDark: airWhite,
     positions: [
       {
         title: "Sr. DevSecOps Engineer",
@@ -90,6 +92,7 @@ const experience: Experience[] = [
         name={e.name}
         url={e.url}
         image={e.image}
+        imageDark={e.imageDark}
         positions={e.positions}
       />
     ))

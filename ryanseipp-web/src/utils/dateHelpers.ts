@@ -18,11 +18,11 @@ const subtractMonth = addMonths(-1);
 
 const getExperienceRangeFormatter =
   (format: Intl.DateTimeFormat) => (startDate: Date, endDate: Date) =>
-    `${format.formatRange(subtractMonth(startDate), subtractMonth(endDate))} ꞏ ${formatDuration(startDate, subtractMonth(endDate))}`;
+    `${format.formatRange(subtractMonth(startDate), subtractMonth(endDate))} · ${formatDuration(startDate, subtractMonth(endDate))}`;
 
 const getExperienceToPresentFormatter =
   (format: Intl.DateTimeFormat) => (startDate: Date) =>
-    `${format.format(subtractMonth(startDate))} - Present ꞏ ${formatDuration(startDate)}`;
+    `${format.format(subtractMonth(startDate))} - Present · ${formatDuration(startDate)}`;
 
 export const getDateSpanFormatter = (format: Intl.DateTimeFormat) => {
   const formatExperienceRange = getExperienceRangeFormatter(format);

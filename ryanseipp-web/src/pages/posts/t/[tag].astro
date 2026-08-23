@@ -7,9 +7,9 @@ import TagIcon from "../../../components/icons/TagIcon.astro";
 
 export const getStaticPaths = (async () => {
   const blogPosts = await getCollection("blog", (entry) => !entry.data.draft);
-  const uniqueCategories = blogPosts.flatMap(
-    (post) => post.data.categories ?? [],
-  );
+  const uniqueCategories = [
+    ...new Set(blogPosts.flatMap((post) => post.data.categories ?? [])),
+  ];
 
   return uniqueCategories.map((tag) => ({
     params: {tag},

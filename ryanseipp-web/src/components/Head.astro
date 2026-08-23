@@ -1,4 +1,5 @@
 ---
+import {Font} from "astro:assets";
 import type {LayoutProps} from "../types/Layout";
 
 type Props = LayoutProps;
@@ -11,6 +12,8 @@ const shortTitle = title.split(" | ")[0];
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
   <meta name="generator" content={Astro.generator} />
+  <Font cssVariable="--font-inter" preload />
+  <Font cssVariable="--font-source-code-pro" preload />
   <title>{title}</title>
   <meta name="description" content={description} />
   <meta name="twitter:description" content={description} />

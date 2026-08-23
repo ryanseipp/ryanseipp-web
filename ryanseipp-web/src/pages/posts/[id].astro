@@ -18,19 +18,21 @@ function formatDate(date: Date) {
 const {post} = Astro.props;
 const {Content, remarkPluginFrontmatter: frontmatter} = await render(post);
 const pubDate = formatDate(post.data.pubDate);
+const isoDate = post.data.pubDate.toISOString();
+const isoDay = isoDate.slice(0, 10);
 ---
 
 <Layout
   title={`${post.data.title} | Ryan Seipp`}
   description={post.data.description}
-  article={{published_time: pubDate}}
+  article={{published_time: isoDate}}
 >
   <h1 class="mb-2 text-4xl text-cyan-600 dark:text-cyan-400">
     {post.data.title}
   </h1>
   <h2 class="text-xl">{post.data.description}</h2>
   <span class="flex items-center gap-2 text-sm font-light">
-    <time datetime={pubDate}>{pubDate}</time>
+    <time datetime={isoDay}>{pubDate}</time>
     <span aria-hidden="true">&middot;</span>
     <span>{frontmatter.minutesRead}</span>
   </span>
