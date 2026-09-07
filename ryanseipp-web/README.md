@@ -15,6 +15,15 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 
+## 📦 Dependencies
+
+`typescript` is intentionally held at `^6`. TypeScript 7 is the native Go port
+and ships no programmatic compiler API, while `@astrojs/check` — which
+`npm run build` runs before `astro build` — peer-requires `typescript`
+`^5 || ^6` and drives the Astro language server through that API. Revisit once
+`@astrojs/check` widens its peer range; upstream tracking is
+[withastro/roadmap#1321](https://github.com/withastro/roadmap/discussions/1321).
+
 ## 👀 Want to learn more?
 
 Feel free to check [our documentation](https://docs.astro.build) or jump into
